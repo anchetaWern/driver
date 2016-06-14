@@ -22,6 +22,6 @@ Route::get('/search', 'AdminController@search');
 Route::get('/upload', 'AdminController@upload');
 Route::post('/upload', 'AdminController@doUpload');
 
-Route::get('/trash/{id}', 'AdminController@trash');
+Route::get('/delete/{id}', 'AdminController@delete');
 
 Route::get('/logout', 'AdminController@logout');

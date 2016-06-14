@@ -35,7 +35,7 @@ class AdminController extends Controller
 			try {
 				$parameters = [
 					'q' => "viewedByMeTime >= '$three_months_ago' or modifiedTime >= '$three_months_ago'",
-					'orderBy' => 'modifiedTime,name',
+					'orderBy' => 'modifiedTime',
                     'fields' => 'nextPageToken, files(id, name, modifiedTime, iconLink, webViewLink, webContentLink)',
 				];
 
@@ -55,7 +55,7 @@ class AdminController extends Controller
 						'text' => 'Something went wrong while trying to list the files'
 			  		]
 			  	);
-			  $pageToken = NULL;
+			    $pageToken = NULL;
 			}
 		} while ($pageToken);
 
@@ -95,7 +95,7 @@ class AdminController extends Controller
    }
 
 
-    public function trash($id)
+    public function delete($id)
     {
 		try {
 			$this->drive->files->delete($id);
@@ -103,14 +103,14 @@ class AdminController extends Controller
 			return redirect('/search')
 				->with('message', [
 					'type' => 'error',
-					'text' => 'Something went wrong while trying to put the file into trash'
+					'text' => 'Something went wrong while trying to delete the file'
 				]);
 		}
 
 		return redirect('/search')
 			->with('message', [
 				'type' => 'success',
-				'text' => 'File was put into trash'
+				'text' => 'File was deleted'
 			]);
    }
 
